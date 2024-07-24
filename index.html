@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>AI 디지털 교과서 유형 테스트</title>
+    <title> AI 디지털 교과서 유형 테스트</title>
     <style>
         body {
             font-family: Arial, sans-serif;
@@ -55,6 +55,11 @@
             background-color: #e9ecef;
             border-radius: 5px;
         }
+        .error {
+            color: red;
+            display: none;
+            margin-top: 10px;
+        }
     </style>
 </head>
 <body>
@@ -71,6 +76,7 @@
                 <label><input type="radio" name="q1" value="c"> 선생님이나 멘토에게 질문하여 해결책을 찾는다.</label>
                 <label><input type="radio" name="q1" value="d"> 책이나 인터넷에서 자료를 찾아본다.</label>
             </div>
+            <div class="error">항목을 선택해주세요.</div>
             <button type="button" class="button next-button">다음</button>
         </div>
 
@@ -83,6 +89,7 @@
                 <label><input type="radio" name="q2" value="c"> 언제든지 질문하고 답을 얻을 수 있는 수업</label>
                 <label><input type="radio" name="q2" value="d"> 다양한 참고 자료와 리소스를 제공하는 수업</label>
             </div>
+            <div class="error">항목을 선택해주세요.</div>
             <button type="button" class="button next-button">다음</button>
         </div>
 
@@ -96,6 +103,7 @@
                 <label><input type="radio" name="q3" value="c"> 선생님이나 친구들에게 도움 요청</label>
                 <label><input type="radio" name="q3" value="d"> 참고 자료나 인터넷을 활용</label>
             </div>
+            <div class="error">항목을 선택해주세요.</div>
             <button type="button" class="button next-button">다음</button>
         </div>
 
@@ -108,6 +116,7 @@
                 <label><input type="radio" name="q4" value="c"> 실시간 질문 응답</label>
                 <label><input type="radio" name="q4" value="d"> 다양한 학습 자료 제공</label>
             </div>
+            <div class="error">항목을 선택해주세요.</div>
             <button type="button" class="button next-button">다음</button>
         </div>
 
@@ -120,6 +129,7 @@
                 <label><input type="radio" name="q5" value="c"> 선생님이나 멘토의 조언을 받음</label>
                 <label><input type="radio" name="q5" value="d"> 참고 자료를 통해 꼼꼼히 공부</label>
             </div>
+            <div class="error">항목을 선택해주세요.</div>
             <button type="button" class="button next-button">다음</button>
         </div>
 
@@ -132,6 +142,7 @@
                 <label><input type="radio" name="q6" value="c"> 멘토의 따뜻한 조언과 응원</label>
                 <label><input type="radio" name="q6" value="d"> 다양한 학습 자료와 정보 제공</label>
             </div>
+            <div class="error">항목을 선택해주세요.</div>
             <button type="button" class="button next-button">다음</button>
         </div>
 
@@ -144,6 +155,7 @@
                 <label><input type="radio" name="q7" value="c"> 선생님이나 친구에게 질문</label>
                 <label><input type="radio" name="q7" value="d"> 자료를 찾아보며 스스로 해결</label>
             </div>
+            <div class="error">항목을 선택해주세요.</div>
             <button type="button" class="button next-button">다음</button>
         </div>
 
@@ -156,6 +168,7 @@
                 <label><input type="radio" name="q8" value="c"> 멘토의 조언에 따른 목표</label>
                 <label><input type="radio" name="q8" value="d"> 참고 자료를 통한 목표 설정</label>
             </div>
+            <div class="error">항목을 선택해주세요.</div>
             <button type="button" class="button next-button">다음</button>
         </div>
 
@@ -168,6 +181,7 @@
                 <label><input type="radio" name="q9" value="c"> 멘토와 상담할 때</label>
                 <label><input type="radio" name="q9" value="d"> 새로운 자료를 찾을 때</label>
             </div>
+            <div class="error">항목을 선택해주세요.</div>
             <button type="button" class="button next-button">다음</button>
         </div>
 
@@ -180,6 +194,7 @@
                 <label><input type="radio" name="q10" value="c"> 실시간 질문 응답</label>
                 <label><input type="radio" name="q10" value="d"> 다양한 학습 자료</label>
             </div>
+            <div class="error">항목을 선택해주세요.</div>
             <button type="submit" class="button">제출하기</button>
         </div>
     </form>
@@ -194,10 +209,17 @@
         button.addEventListener('click', function() {
             const currentQuestion = this.closest('.question-container');
             const nextQuestion = currentQuestion.nextElementSibling;
+            const selectedOption = currentQuestion.querySelector('input[type="radio"]:checked');
+            const error = currentQuestion.querySelector('.error');
 
-            if (nextQuestion && nextQuestion.classList.contains('question-container')) {
-                currentQuestion.classList.remove('active');
-                nextQuestion.classList.add('active');
+            if (selectedOption) {
+                error.style.display = 'none';
+                if (nextQuestion && nextQuestion.classList.contains('question-container')) {
+                    currentQuestion.classList.remove('active');
+                    nextQuestion.classList.add('active');
+                }
+            } else {
+                error.style.display = 'block';
             }
         });
     });
